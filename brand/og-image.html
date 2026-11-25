@@ -1,0 +1,86 @@
+<!doctype html>
+<!-- Source of og-image.png (1200 × 630): render it with ./render.sh. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #07070b;
+        color: #f5f2f7;
+        font-family: 'Geist', system-ui, sans-serif;
+      }
+
+      .warm {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(520px 340px at 600px 230px, rgb(255 45 120 / 0.16), transparent);
+      }
+
+      svg {
+        position: absolute;
+        left: 0;
+        top: 30px;
+        width: 1200px;
+        height: 390px;
+      }
+
+      .words {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 64px;
+        text-align: center;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 58px;
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -0.045em;
+      }
+
+      p {
+        margin: 18px 0 0;
+        color: #a8a2b4;
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      p span {
+        color: #ff2d78;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="warm"></div>
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <path
+          id="heart"
+          d="M-400 420 C180 420 330 390 430 312 C372 252 392 132 500 132 C566 132 596 178 600 214 C604 178 634 132 700 132 C808 132 828 252 770 312 C700 384 626 430 600 476 C650 430 820 420 1600 420"
+        />
+      </defs>
+      <g
+        transform="translate(600 300) scale(1.5) translate(-600 -304)"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <use href="#heart" stroke="#ff2d78" stroke-opacity="0.14" stroke-width="20" />
+        <use href="#heart" stroke="#ff2d78" stroke-opacity="0.45" stroke-width="7" />
+        <use href="#heart" stroke="#ffe0eb" stroke-width="2.4" />
+      </g>
+    </svg>
+    <div class="words">
+      <h1>Apps built with AI, for the love of building.</h1>
+      <p>forlovers<span>.app</span></p>
+    </div>
+  </body>
+</html>

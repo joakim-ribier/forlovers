@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build output and Astro's generated types
+dist/
+.astro/
+
+# Settings written by make init (.env.example is the versioned model)
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+
+# Claude Code: worktrees and personal settings (the shared skills in .claude/skills stay versioned)
+.claude/worktrees/
+.claude/settings.local.json
+
+# OS and editors
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>glowtrail</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#121a2a"/>
+      <stop offset="1" stop-color="#04060b"/>
+    </linearGradient>
+    <linearGradient id="trail" gradientUnits="userSpaceOnUse" x1="96" y1="200" x2="402" y2="384">
+      <stop offset="0" stop-color="#0b3a4a"/>
+      <stop offset=".45" stop-color="#1b9cc4"/>
+      <stop offset=".8" stop-color="#22d6ff"/>
+      <stop offset="1" stop-color="#d9fbff"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="spark" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset=".35" stop-color="#bff6ff"/>
+      <stop offset="1" stop-color="#22d6ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- the tile -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect x="3" y="3" width="506" height="506" rx="109" fill="none" stroke="#22d6ff" stroke-opacity=".18" stroke-width="3"/>
+  <!-- gt: one road, the two letters on it; dark like an outline being drawn, lit up to the glow -->
+  <g filter="url(#glow)" fill="none" stroke="url(#trail)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M96 200 L420 200"/>
+    <path d="M226 200 C200 176 152 180 136 214 C118 254 140 296 182 296 C216 296 236 270 238 236 L238 330 C238 384 206 410 164 408 C136 406 118 394 108 380"/>
+    <path d="M352 120 L352 330 C352 370 372 388 402 384"/>
+  </g>
+  <circle cx="402" cy="384" r="36" fill="url(#spark)"/>
+  <circle cx="402" cy="384" r="12" fill="#fff"/>
+</svg>

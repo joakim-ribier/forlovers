@@ -1,0 +1,22 @@
+{
+  "meta.title": "forlovers: apps built with AI, for the love of building",
+  "meta.description": "Apps built with AI, for the love of building. No startup, no roadmap: just things we wanted to exist.",
+  "nav.github": "GitHub",
+  "manifesto.title": "Apps built with AI, for the love of building.",
+  "manifesto.body": "No startup, no roadmap, no excuses. Just things we wanted to exist, built in the evenings with an AI and a lot of love.",
+  "apps.title": "Made with love so far",
+  "apps.open": "Open {name}",
+  "apps.source": "Source: {name} on GitHub",
+  "apps.accessLabel": "Access",
+  "apps.stackLabel": "Built with",
+  "apps.glowtrail.tagline": "Every run, ride and hike, glowing on one map",
+  "apps.glowtrail.body": "A light heatmap of all your sport activities, drawn from your .fit files and kept in sync with Garmin. Zoom from the whole world down to your street.",
+  "apps.glowtrail.access": "Invite only",
+  "apps.hashboard.tagline": "Your Bitcoin miners, watched from anywhere",
+  "apps.hashboard.body": "Remote monitoring for AxeOS-compatible ASIC miners. A small feeder on your network pushes the stats; you get a board you can keep private or share.",
+  "apps.hashboard.access": "Sign in with a magic link",
+  "apps.here": "You're here",
+  "apps.forlovers.tagline": "This page, a neon heart for the love of building",
+  "apps.forlovers.body": "The home of everything above: one neon line that draws a heart, a manifesto, and the list of what we built. Static, light, and ready to speak more languages.",
+  "apps.forlovers.access": "Open to everyone"
+}

@@ -1,0 +1,116 @@
+---
+/**
+ * One neon line that comes in from the left, draws a heart and leaves on the
+ * right, like a glowtrail route lit up. The glow is stacked strokes, not a
+ * blur filter, so it stays cheap to animate on phones.
+ *
+ * The heart is sized by the stage's height (meet), and the line runs far past
+ * the viewBox on both sides (overflow visible) so it crosses any screen width.
+ * The whole line runs on one smooth curve: no phases, so it never stops midway.
+ *
+ * The line (stroke-dashoffset) and the spark at its tip (animateMotion) share
+ * the same SMIL timing: one clock, so the spark never runs ahead of the line.
+ */
+type Pt = [number, number];
+type Cubic = [Pt, Pt, Pt]; // control 1, control 2, end
+
+const TAIL = 800; // past the heart's own ends: enough to reach the edge of a 2560px screen
+const start: Pt = [-400, 420];
+const curves: Cubic[] = [
+  [[180, 420], [330, 390], [430, 312]], // the route arrives
+  [[372, 252], [392, 132], [500, 132]], // left lobe
+  [[566, 132], [596, 178], [600, 214]], // into the dip
+  [[604, 178], [634, 132], [700, 132]], // right lobe
+  [[808, 132], [828, 252], [770, 312]],
+  [[700, 384], [626, 430], [600, 476]], // down to the tip
+  [[650, 430], [820, 420], [1600, 420]], // and on to the next thing
+];
+
+const heart = [
+  `M${start[0] - TAIL} ${start[1]}`,
+  `L${start.join(' ')}`,
+  ...curves.map((c) => `C${c.flat().join(' ')}`),
+  `l${TAIL} 0`,
+].join(' ');
+
+// Same timing for the line and the spark: one gentle ease over the whole line.
+const timing = {
+  begin: '0.2s',
+  dur: '3.8s',
+  fill: 'freeze',
+  calcMode: 'spline',
+  keyTimes: '0;1',
+  keySplines: '0.35 0 0.65 1',
+} as const;
+
+const layers = ['wide', 'mid', 'core'];
+---
+
+<svg class="heart" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <!-- Scaled up around the centre so the heart fills most of the stage height. -->
+  <g transform="translate(600 300) scale(1.6) translate(-600 -304)">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <animate
+        attributeName="opacity"
+        begin="draw.end"
+        dur="1.8s"
+        repeatCount="indefinite"
+        values="0.85;1;0.9;1;0.85;0.85"
+        keyTimes="0;0.12;0.2;0.28;0.4;1"></animate>
+      {
+        layers.map((layer, i) => (
+          <path class={layer} d={heart} pathLength="1" stroke-dasharray="1" stroke-dashoffset="1">
+            <animate
+              id={i === 0 ? 'draw' : undefined}
+              attributeName="stroke-dashoffset"
+              values="1;0"
+              {...timing}
+            />
+          </path>
+        ))
+      }
+    </g>
+    <circle class="spark" r="6" cx="0" cy="0" opacity="0">
+      <animateMotion path={heart} keyPoints="0;1" {...timing}></animateMotion>
+      <set attributeName="opacity" to="1" begin="0.2s"></set>
+      <set attributeName="opacity" to="0" begin="draw.end"></set>
+    </circle>
+  </g>
+</svg>
+
+<!-- Reduced motion: public/heart-still.js shows the heart already drawn. -->
+<script is:inline src="/heart-still.js" defer></script>
+
+<style>
+  .heart {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Stroke widths are in path units (scale 1.6): on a ~330px stage they render
+     about 25px of halo and a 3px core, the look of the first neon version. */
+  .wide {
+    stroke: var(--neon);
+    stroke-opacity: 0.14;
+    stroke-width: 29;
+  }
+
+  .mid {
+    stroke: var(--neon);
+    stroke-opacity: 0.45;
+    stroke-width: 10;
+  }
+
+  .core {
+    stroke: var(--neon-core);
+    stroke-width: 3.4;
+  }
+
+  .spark {
+    fill: #fff;
+    filter: drop-shadow(0 0 6px var(--neon));
+  }
+</style>
