@@ -1,0 +1,10 @@
+# forlovers before its certificate (make install-certificate): port 80 answers Let's Encrypt's
+# check for its two names, from the folder certbot writes in. Not default_server: the server
+# may host other sites, which keep their own blocks.
+server {
+    listen 80;
+    listen [::]:80;
+    server_name @APEX@ @DOMAIN@;
+    location /.well-known/acme-challenge/ { root /var/www/letsencrypt; }
+    location / { return 404; }
+}
