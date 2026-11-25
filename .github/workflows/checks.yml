@@ -53,7 +53,9 @@ jobs:
         with:
           fetch-depth: 0 # the whole history, not just the last commit
 
+      # gitleaks run directly on the whole history: gitleaks-action scans only the pushed
+      # range and fails when it starts at the root commit (no parent).
       - name: secrets in the history (gitleaks)
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker run --rm -v "$PWD:/repo" --entrypoint sh ghcr.io/gitleaks/gitleaks:latest \
+            -c 'git config --global --add safe.directory /repo && gitleaks git /repo --redact --no-banner'
