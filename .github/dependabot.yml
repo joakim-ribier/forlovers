@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # npm: one grouped pull request a week for minor and patch updates; security fixes come at once.
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      npm:
+        update-types: [minor, patch]
+
+  # The actions used by .github/workflows.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
